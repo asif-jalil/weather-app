@@ -9,6 +9,8 @@
 - Temperature, Pressure and Humidity will also be shown
 - History for your previous search
 
+![This is Preview of the weather app](link to image / GIF)
+
 ## Get started with this repo
 
 If you want to add more feature, simply clone this repo
