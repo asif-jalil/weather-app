@@ -177,3 +177,34 @@ body {
     font-size: 15px;
     margin-bottom: 0;
 }
+
+@media (max-width: 575px) {
+    .history-container-wrapper {
+        width: 285px;
+    }
+
+    .history-container-trigger {
+        width: calc(100% - 65px);
+    }
+
+    .form-control {
+        font-size: 12px;
+    }
+
+    .history-date {
+        margin-bottom: 0;
+        font-size: 13px;
+    }
+
+    .history-temp {
+        font-size: 17px;
+    }
+
+    .history-weather {
+        font-size: 14px;
+    }
+
+    .history-details p {
+        font-size: 13px;
+    }
+}

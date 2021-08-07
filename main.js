@@ -41,7 +41,7 @@ const UI = {
         const alertMsg = document.querySelector("#alertMsg");
         const historyContainer = document.querySelector("#historyContainer");
         const historyTrigger = document.querySelector("#historyTrigger");
-        const historyEmptyAlert = document.querySelector("#historyEmptyAlert")
+        const historyEmptyAlert = document.querySelector("#historyEmptyAlert");
 
         return {
             weatherForm,
@@ -58,29 +58,29 @@ const UI = {
             alertMsg,
             historyContainer,
             historyTrigger,
-            historyEmptyAlert
+            historyEmptyAlert,
         };
     },
     loadHistory() {
-        const {historyEmptyAlert} = this.loadSelector()
+        const { historyEmptyAlert } = this.loadSelector();
         storage.getData();
         if (weatherData.history.length > 0) {
             weatherData.history.forEach((item) => {
-                this.displayHistoryItem(item)
+                this.displayHistoryItem(item);
             });
         } else {
-            historyEmptyAlert.classList.remove('d-none')
+            historyEmptyAlert.classList.remove("d-none");
         }
     },
     displayHistoryItem(data) {
-        const {historyContainer, historyEmptyAlert} = this.loadSelector()
+        const { historyContainer, historyEmptyAlert } = this.loadSelector();
         const { cityName, temp, weather, humidity, pressure, icon, time } = data;
-        if (!historyEmptyAlert.classList.contains('d-none')) {
-            historyEmptyAlert.classList.add('d-none')
+        if (!historyEmptyAlert.classList.contains("d-none")) {
+            historyEmptyAlert.classList.add("d-none");
         }
 
-        let div = document.createElement('div');
-        div.classList.add('history-item');
+        let div = document.createElement("div");
+        div.classList.add("history-item");
         div.innerHTML = `
             <div class="history-item-heading">
                 <h3 class="history-place">${cityName}</h3>
@@ -98,7 +98,7 @@ const UI = {
             </div>
         `;
 
-        historyContainer.insertAdjacentElement('afterbegin', div);
+        historyContainer.insertAdjacentElement("afterbegin", div);
     },
     showMsg(msg) {
         const { alertToast, alertMsg } = this.loadSelector();
@@ -110,7 +110,7 @@ const UI = {
         });
         toast.show();
     },
-    checkValidity(country, city) {
+    checkValidity(city) {
         if (city === "") {
             return false;
         } else {
@@ -121,7 +121,7 @@ const UI = {
         const { countryInput, cityInput } = this.loadSelector();
         const countryInputValue = countryInput.value.trim();
         const cityInputValue = cityInput.value.trim();
-        const isValid = this.checkValidity(countryInputValue, cityInputValue);
+        const isValid = this.checkValidity(cityInputValue);
 
         if (isValid) {
             // set city and country to weather data
@@ -145,8 +145,14 @@ const UI = {
         this.displayHistoryItem(data);
     },
     displayWeatherReport(data) {
-        const { weatherResult, placeEl, tempEl, cloudIconEl, weatherEl, humidityEl, pressureEl } = this.loadSelector();
+        const { weatherResult, placeEl, tempEl, cloudIconEl, weatherEl, humidityEl, pressureEl, historyContainer, historyTrigger } =
+            this.loadSelector();
         const { main, name: cityName, weather } = data;
+
+        if (window.innerWidth < 992 && historyContainer.classList.contains("show")) {
+            historyContainer.classList.remove("show");
+            historyTrigger.classList.remove("active");
+        }
 
         // Display on UI
         placeEl.textContent = cityName;
@@ -166,7 +172,7 @@ const UI = {
             humidity: main.humidity,
             pressure: main.pressure,
             icon: weather[0].icon,
-            time: now
+            time: now,
         };
         this.addToHistory(historyData);
     },
@@ -198,8 +204,3 @@ const UI = {
 };
 
 UI.init();
-
-
-
-
-
