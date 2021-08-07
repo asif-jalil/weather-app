@@ -9,7 +9,7 @@
 - Temperature, Pressure and Humidity will also be shown
 - History for your previous search
 
-![Preview](image/weather-app.gif)
+![Preview](https://raw.githubusercontent.com/asif-jalil/weather-app/main/images/weather-app.gif)
 
 ## Get started with this repo
 
